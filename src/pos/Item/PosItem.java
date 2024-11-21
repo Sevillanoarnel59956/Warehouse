@@ -1,6 +1,7 @@
 
 package pos.Item;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.Color;
 import pos.Model.ItemModel;
 
@@ -33,6 +34,7 @@ public class PosItem extends javax.swing.JPanel {
    
     public PosItem() {
         initComponents();
+          jPanel1.putClientProperty(FlatClientProperties.STYLE,"arc: 15");
         setOpaque(false);
     }
 

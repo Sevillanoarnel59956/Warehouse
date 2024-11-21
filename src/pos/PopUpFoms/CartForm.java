@@ -53,6 +53,8 @@ public class CartForm extends javax.swing.JPanel {
         lbPrice.setForeground(new java.awt.Color(102, 102, 102));
         lbPrice.setText("Price");
 
+        txtQty.setEditable(false);
+        txtQty.setBackground(new java.awt.Color(255, 255, 255));
         txtQty.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtQty.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtQty.setText("1");
@@ -60,6 +62,7 @@ public class CartForm extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(51, 102, 0));
         jButton1.setText("-");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -69,6 +72,7 @@ public class CartForm extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(51, 102, 0));
         jButton2.setText("+");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

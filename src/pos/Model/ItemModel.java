@@ -9,44 +9,28 @@ import javax.swing.Icon;
 
 public class ItemModel {
 
-    /**
-     * @return the cartIndex
-     */
+   
     public int getCartIndex() {
         return cartIndex;
     }
 
-    /**
-     * @param cartIndex the cartIndex to set
-     */
     public void setCartIndex(int cartIndex) {
         this.cartIndex = cartIndex;
     }
 
-    /**
-     * @return the quantity
-     */
     public int getQuantity() {
         return quantity;
     }
 
-    /**
-     * @param quantity the quantity to set
-     */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    /**
-     * @return the status
-     */
+  
     public String getStatus() {
         return status;
     }
 
-    /**
-     * @param status the status to set
-     */
     public void setStatus(String status) {
         this.status = status;
     }
