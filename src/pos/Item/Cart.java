@@ -2,6 +2,8 @@
 package pos.Item;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import java.text.DecimalFormat;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import pos.Model.ItemModel;
@@ -17,15 +19,20 @@ public class Cart extends javax.swing.JPanel {
         return data;
     }
 
-  
+   private static final DecimalFormat df = new DecimalFormat("00.00");
     public void setData(ItemModel data) {
         this.data = data;
-        itemImage.setImage(data.getItemImage());
-        lbTitle.setText(data.getTitle());
-        String priceStr = Integer.toString(data.getPrice());
-        lbPrice.setText(priceStr);
+        if (data.getItemImage().getIcon()!=null) {
+              itemImage.setImage(data.getItemImage().getIcon());
+        }else{
+            itemImage.setImage(new ImageIcon(getClass().getResource("/pos/Image/fries.jpg")));
+        }
+      
+        lbTitle.setText(data.getTitle());   
+        String priceData = df.format(data.getPrice());
+        lbPrice.setText(priceData);
         String qtyStr = Integer.toString(data.getQuantity());
-        lbPrice.setText(priceStr);
+        
         txtQty.setText(qtyStr);
     }
 
@@ -96,6 +103,11 @@ public class Cart extends javax.swing.JPanel {
         txtQty.setText("0");
 
         addqty.setText("+");
+        addqty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addqtyActionPerformed(evt);
+            }
+        });
 
         deleteIndex.setBackground(new java.awt.Color(204, 0, 0));
         deleteIndex.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -168,6 +180,13 @@ public class Cart extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addqtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addqtyActionPerformed
+        if (data.getQuantity()==qtyData) {
+            return;
+            
+        }
+    }//GEN-LAST:event_addqtyActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
