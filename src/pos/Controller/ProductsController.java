@@ -105,10 +105,6 @@ public class ProductsController implements ProductsInterface{
             e.printStackTrace();
         }
     }
-
-    
-    
-    
     @Override
     public List<ItemModel> getProducts(String search,String categories,String orderBy) {
           List<ItemModel> listOfProducts = new ArrayList<>();

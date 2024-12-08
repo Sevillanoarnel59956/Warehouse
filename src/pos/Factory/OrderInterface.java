@@ -4,6 +4,7 @@
  */
 package pos.Factory;
 
+import java.util.List;
 import pos.Model.OrdersModel;
 
 /**
@@ -12,4 +13,6 @@ import pos.Model.OrdersModel;
  */
 public interface OrderInterface {
     void createOrder(OrdersModel orders);
+    void updateProductsOrdered(OrdersModel orders);
+    List<OrdersModel>getOrderedProducts(String orderNumber);
 }

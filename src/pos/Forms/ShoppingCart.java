@@ -5,6 +5,7 @@ import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,10 +14,16 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import pos.Categories.Categories;
@@ -55,7 +62,8 @@ public class ShoppingCart extends javax.swing.JPanel {
     private ProductsInterface productsController = productsFactory.CreateProductsController();
     private OrderInterface orderController = productsFactory.CreateOrderController();
     public ShoppingCart() throws SQLException {
-        initComponents();        
+        initComponents();    
+      
         init();
 
     }
@@ -315,7 +323,6 @@ public class ShoppingCart extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         cartItems = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         cashierCb = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         lbTotal = new javax.swing.JLabel();
@@ -325,8 +332,6 @@ public class ShoppingCart extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         lbChange = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        orderIdLbl = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listItem = new javax.swing.JPanel();
         categoriesCb = new javax.swing.JComboBox<>();
@@ -353,24 +358,20 @@ public class ShoppingCart extends javax.swing.JPanel {
         );
         cartItemsLayout.setVerticalGroup(
             cartItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGap(0, 479, Short.MAX_VALUE)
         );
 
         jScrollPane2.setViewportView(cartItems);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setText("Order : #");
-
         cashierCb.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cashierCb.setForeground(new java.awt.Color(102, 102, 102));
-        cashierCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMIN", "DAZZLE", "CALYLE", "ARNEL", "KHIANNE" }));
+        cashierCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMIN", "EMPLOYEE" }));
         cashierCb.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         cashierCb.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Cashier");
+        jLabel2.setText("Cashier:");
 
         lbTotal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbTotal.setForeground(new java.awt.Color(0, 51, 51));
@@ -408,17 +409,6 @@ public class ShoppingCart extends javax.swing.JPanel {
             }
         });
 
-        orderIdLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        orderIdLbl.setForeground(new java.awt.Color(102, 102, 102));
-        orderIdLbl.setText("1094729");
-
-        jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -447,38 +437,23 @@ public class ShoppingCart extends javax.swing.JPanel {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(10, 10, 10))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
-                                .addComponent(orderIdLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(12, 12, 12))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cashierCb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cashierCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cashierCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cashierCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3)))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(orderIdLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(3, 3, 3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbTotal)
@@ -534,7 +509,7 @@ public class ShoppingCart extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("ADD");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -638,13 +613,25 @@ public class ShoppingCart extends javax.swing.JPanel {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_searchFieldActionPerformed
-
+ private static String generateRandomID(String candidateChar,int length){
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            sb.append(candidateChar.charAt(random.nextInt(candidateChar.length())));
+            
+        }
+        return sb.toString();
+        
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
+         String Alphabet = "ABCDEFGHIJKLMNPQRSTUVWXYZ1234567890";
+         String randomID = generateRandomID(Alphabet, 6);
             
             if (!cart.isEmpty()) {
                 double cashData = Double.parseDouble(txtCash.getText());
-            orderController.createOrder(new OrdersModel(orderIdLbl.getText(),(String) cashierCb.getSelectedItem(), cart, total, change, cashData));
+            orderController.createOrder(new OrdersModel(randomID,(String) cashierCb.getSelectedItem(), cart, total, change, cashData));
+            orderController.updateProductsOrdered(new OrdersModel(randomID,(String) cashierCb.getSelectedItem(), cart, total, change, cashData));
            
             
               cart.clear();
@@ -663,12 +650,6 @@ public class ShoppingCart extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-     cart.clear();
-     
-     cartData();
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtCashKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCashKeyTyped
         char c = evt.getKeyChar();
@@ -857,6 +838,45 @@ public class ShoppingCart extends javax.swing.JPanel {
        });
        
    }
+   private boolean isPopupVisible = false;
+  public void onPopupClosed() {
+    isPopupVisible = false; // Reset the flag when popup is closed
+}
+       public void setupKeyBindings() {
+        // Get the root pane's input map and action map
+       
+        InputMap inputMap = this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = this.getRootPane().getActionMap();
+
+        // Define the key strokes for Alt + F1 and Alt + F2
+        KeyStroke altF1 = KeyStroke.getKeyStroke(KeyEvent.VK_F1, KeyEvent.ALT_DOWN_MASK);
+        KeyStroke altF2 = KeyStroke.getKeyStroke(KeyEvent.VK_F2, KeyEvent.ALT_DOWN_MASK);
+         KeyStroke altF3 = KeyStroke.getKeyStroke(KeyEvent.VK_F3, KeyEvent.ALT_DOWN_MASK);
+
+        // Map the key strokes to action keys
+        inputMap.put(altF1, "altF1");
+        inputMap.put(altF2, "altF2");
+        inputMap.put(altF3, "altF3");
+
+        // Define the actions
+        actionMap.put("altF1", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+             
+              if (!isPopupVisible) {
+                    isPopupVisible = true;
+                    }
+                    InsertItem();
+                
+                
+  
+                
+            }
+            
+        });
+       
+       
+    }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cartItems;
@@ -864,8 +884,6 @@ public class ShoppingCart extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> categoriesCb;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -877,7 +895,6 @@ public class ShoppingCart extends javax.swing.JPanel {
     private javax.swing.JLabel lbChange;
     private javax.swing.JLabel lbTotal;
     private javax.swing.JPanel listItem;
-    private javax.swing.JLabel orderIdLbl;
     private javax.swing.JTextField searchField;
     private javax.swing.JComboBox<String> sortedBy;
     private javax.swing.JTextField txtCash;

@@ -2,6 +2,7 @@
 package pos.Model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrdersModel {
 
@@ -71,4 +72,14 @@ public class OrdersModel {
     private Double total;
     private Double cash;
     private Double change;
+    
+   public Object[] toObject() {
+    // Convert list_of_products to a list of strings or summaries
+    List<String> productSummaries = list_of_products.stream()
+            .map(item -> item.toString()) // assuming ItemModel has a toString method
+            .collect(Collectors.toList());
+
+    return new Object[] { ordersId, cashier, total, cash, change };
+}
+
 }

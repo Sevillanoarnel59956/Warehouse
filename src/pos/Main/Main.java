@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import pos.Database.DatabaseConnection;
 import pos.Forms.HistoryForms;
 import pos.Forms.ShoppingCart;
@@ -21,6 +22,10 @@ public class Main extends javax.swing.JFrame {
     public Main() throws SQLException {
         initComponents();
         cart = new ShoppingCart();
+     
+        SwingUtilities.invokeLater(() -> {
+    cart.setupKeyBindings();
+});
         mainPanel.setLayout(new BorderLayout());
         showForm(cart);
         
@@ -72,14 +77,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Test");
+        jButton2.setText("History");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Test");
+        jButton3.setText("Dashboard");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
