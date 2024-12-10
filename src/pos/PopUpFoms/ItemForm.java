@@ -104,8 +104,6 @@ public class ItemForm extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         productImage = new pos.Swing.PictureBox();
 
-        titleField.setText("test");
-
         priceField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         priceField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         priceField.setText("01.00");

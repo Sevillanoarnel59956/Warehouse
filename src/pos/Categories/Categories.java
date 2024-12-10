@@ -11,4 +11,5 @@ public enum Categories {
         LiquidDetergents,
         Pods_Capsules,
         BarSoaps
+      
 }

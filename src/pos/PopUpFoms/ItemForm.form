@@ -97,9 +97,6 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="titleField">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="test"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="priceField">
           <Properties>

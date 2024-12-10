@@ -71,10 +71,8 @@ public class ShoppingCart extends javax.swing.JPanel {
         searchField.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Search");
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
                jScrollPane2.getVerticalScrollBar().setUnitIncrement(20);
-        ResponsiveLayout listItemLayout = new ResponsiveLayout(ResponsiveLayout.JustifyContent.FIT_CONTENT, 
-                new Dimension(-1, -1), 2, 2);
-        ResponsiveLayout cartlistLayout = new ResponsiveLayout(ResponsiveLayout.JustifyContent.FIT_CONTENT, 
-                new Dimension(-1, -1), 2, 2);
+        ResponsiveLayout listItemLayout = new ResponsiveLayout(ResponsiveLayout.JustifyContent.FIT_CONTENT, new Dimension(-1, -1), 2, 2);
+        ResponsiveLayout cartlistLayout = new ResponsiveLayout(ResponsiveLayout.JustifyContent.FIT_CONTENT, new Dimension(-1, -1), 2, 2);
        
         cartlistLayout.setColumn(1);
         cartlistLayout.setSize(new Dimension(250, 150));
@@ -636,6 +634,7 @@ public class ShoppingCart extends javax.swing.JPanel {
             
               cart.clear();
              cartData();
+                testData(searchField.getText(),(String)categoriesCb.getSelectedItem(),(String)sortedBy.getSelectedItem());
             
             
             }else{
